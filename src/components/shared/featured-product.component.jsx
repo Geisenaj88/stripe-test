@@ -1,12 +1,15 @@
-import React from 'react'
-import './featured-product.styles.scss'
+import React, { useContext } from 'react';
+import { isInCart } from 'helpers';
+import { CartContext } from 'context/cart-context';
+import './featured-product.styles.scss';
 
-import { useNavigate } from 'react-router-dom'
+
+import { useNavigate } from 'react-router-dom';
 
 const FeaturedProduct = (product) => {
-
-    const { title, imageUrl, price, id } = product;
+    const { title, imageUrl, price, id, description } = product;
     const navigate = useNavigate()
+    const { addProduct, increase, cartItems } = useContext(CartContext);
 
     return (
         <div className='featured-product'>
@@ -16,7 +19,25 @@ const FeaturedProduct = (product) => {
             <div className='name-price'>
                 <h3>{title}</h3>
                 <p>$ {price}</p>
-                <button className='button is-black nomad-btn'>ADD TO CART</button>
+                {
+                    !isInCart(product, cartItems)
+                    ?
+                    <button 
+                        className='button is-black nomad-btn'
+                        onClick={() => addProduct(product)}
+                    >
+                        ADD TO CART
+                    </button>
+                    : 
+                    <button 
+                        className='button is-white nomad-btn'
+                        id='btn-white-outline'
+                        onClick={() => increase(product)}
+                    >
+                        ADD MORE
+                    </button>
+                }
+                
             </div>
         </div>
     )

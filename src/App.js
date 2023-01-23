@@ -7,6 +7,7 @@ import HomePage from 'components/shared/homepage';
 import NotFound from 'components/not-found';
 import Shop from 'components/pages/shop/shop.component';
 import SingleProduct from 'components/single-product/single-product.component';
+import CartPage from 'components/pages/cart-page/cart-page.page';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='*' element={<NotFound />}></Route>
         <Route path='/shop' element={<Shop />}></Route>
         <Route path='/product/:id' element={<SingleProduct />}></Route>
+        <Route path='/cart' element={<CartPage />}></Route>
       </Routes>
     </div>
   );
